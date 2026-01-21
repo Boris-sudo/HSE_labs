@@ -4,7 +4,7 @@ project(hse C)
 set(CMAKE_C_STANDARD 11)
 
 # setting consts
-set(LAB_INDEX e)
+set(LAB_INDEX 5)
 set(HEADERS_DIR libs)
 
 set(HEADERS

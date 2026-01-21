@@ -1,5 +1,4 @@
 #include "input.h"
-#include <stdio.h>
 
 int isWhiteSpace(int c) {
     return (c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f' || c == '\v');
@@ -91,4 +90,23 @@ void input_char(char *value, const char *mes, const char *error, char_validator_
             printf("\n");
         }
     } while (!isDataValid);
+}
+
+size_t input_string(char **value, const char *mes, const char *error) {
+    size_t len = 0;
+    ssize_t read = -1;
+
+    while (read == -1) {
+        printf("%s", mes);
+        read = getline(value, &len, stdin);
+
+        if (read != -1) {
+            if ((*value)[read - 1] == '\n')
+                (*value)[read - 1] = '\0';
+        } else {
+            printf("%s\n", error);
+        }
+    }
+
+    return len;
 }
