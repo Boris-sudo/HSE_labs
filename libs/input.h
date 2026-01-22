@@ -1,6 +1,8 @@
 #ifndef INPUT
 #define INPUT
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef int (*double_validator_func)(const double);
 typedef int (*int_validator_func)(const int);

@@ -96,13 +96,26 @@ size_t input_string(char **value, const char *mes, const char *error) {
     size_t len = 0;
     ssize_t read = -1;
 
+    char buffer[1024];
+    for (int i = 0; i < 1024; ++i) {
+        buffer[i] = '\0';
+    }
+
     while (read == -1) {
         printf("%s", mes);
-        read = getline(value, &len, stdin);
 
-        if (read != -1) {
-            if ((*value)[read - 1] == '\n')
-                (*value)[read - 1] = '\0';
+        if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+            read = 1;
+            len = strlen(buffer);
+            if (len > 0 && buffer[len - 1] == '\n') {
+                buffer[len - 1] = '\0';
+            }
+            len = strlen(buffer);
+
+            *value = malloc(len);
+            if (*value) {
+                strcpy(*value, buffer);
+            }
         } else {
             printf("%s\n", error);
         }
