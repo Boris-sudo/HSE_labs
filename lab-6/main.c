@@ -7,7 +7,7 @@
 typedef void (*MenuFunction)(const char*);
 
 int choice_validator(int choice) {
-    return choice >= 0 && choice <= 6;
+    return choice >= 0 && choice <= 5;
 }
 
 int main() {
@@ -19,9 +19,10 @@ int main() {
             search_records,
             edit_record,
             print_all,
-            initialize_file
     };
     int choice;
+
+    initialize_file(FILENAME);
 
     do {
         printf("\n===== MENU =====\n");
@@ -30,11 +31,10 @@ int main() {
         printf("3. Record Search\n");
         printf("4. Edit an entry\n");
         printf("5. Output all entries\n");
-        printf("6. Initialize file\n");
         printf("0. Exit\n");
         input_int(&choice, "Your choice: ", "Error, please try again.", choice_validator);
 
-        if (choice >= 1 && choice <= 6)
+        if (choice >= 1)
             menu[choice-1](FILENAME);
 
         int x=1;

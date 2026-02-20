@@ -3,8 +3,9 @@ project(hse C)
 
 set(CMAKE_C_STANDARD 11)
 
+
 # setting consts
-set(LAB_INDEX 5)
+set(LAB_INDEX 6)
 set(HEADERS_DIR libs)
 
 set(HEADERS
@@ -26,5 +27,6 @@ set(SOURCES
 
 # adding all the executables
 add_executable(main lab-${LAB_INDEX}/main.c ${SOURCES} ${HEADERS})
+#target_compile_definitions(main PRIVATE AUTO_INITIALIZER)
 #add_executable(add lab-${LAB_INDEX}/add.c ${SOURCES} ${HEADERS})
 add_executable(test test.c)

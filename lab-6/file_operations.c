@@ -12,6 +12,10 @@ int index_validator(int index) {
     return index > 0;
 }
 
+int count_validator(int count) {
+    return count >= 0 && count < 10;
+}
+
 int search_index_validator(int index) {
     return index > 0 && index < 10;
 }
@@ -274,6 +278,8 @@ void initialize_file(const char *filename) {
         return;
     }
 
+#ifdef AUTO_INITIALIZER
+    printf("The file will be initialized automatically.\n");
     Passenger initial_data[] = {
             {101, {15, 3, 2025}, "Ivanov I.I.",  "12A", 15.5},
             {101, {15, 3, 2025}, "Petrov P.P.",  "12B", 20.0},
@@ -288,4 +294,14 @@ void initialize_file(const char *filename) {
     fwrite(initial_data, sizeof(Passenger), count, fp);
     fclose(fp);
     printf("The file is initialized from an array (%d records).\n", count);
+#else
+    printf("Initialize the initial file data manually. To change it, add definition -AUTO_INITIALIZER.\n\n");
+    int count;
+    input_int(&count, "Enter the number of new entries: ", "Error, please try again.", count_validator);
+    for (int i = 0; i < count; ++i) {
+        add_record(filename);
+        printf("\n");
+    }
+#endif
+
 }
