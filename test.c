@@ -1,37 +1,68 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <string.h>
 
-#define forn(i,n) for(int i = 0; i < n; i++)
-
-void swap(int *a, int *b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+// Функция для генерации случайного числа в диапазоне [min, max]
+int random_int(int min, int max) {
+    return min + rand() % (max - min + 1);
 }
 
-signed main() {
-    int n = 10;
-    const int size = n * 3 + (n-1);
-    int arr[n + 10];
-    forn(i, n + 10) arr[i] = 0;
-    arr[0] = arr[1] = 1;
-    forn(i, n) {
-        int temp[n + 10];
-        forn(j, n + 10) temp[j] = arr[j];
-        forn(j, i + 1) {
-            if (j == 0 || j == i) arr[j] = 1;
-            else arr[j] = temp[j] + temp[j - 1];
-        }
+// Функция для генерации случайного символа (буква или цифра)
+char random_char() {
+    int type = rand() % 3;
 
-        int cnt = (i * 3 + (i-1));
-        int spaces = (size - cnt) / 2;
-        forn(k, spaces) printf(" ");
-        forn(j,i + 1) {
-            printf("%3d ", arr[j]);
-        }
-        printf("\n");
+    if (type == 0) {
+        // Цифра
+        return '0' + rand() % 10;
+    } else if (type == 1) {
+        // Строчная буква
+        return 'a' + rand() % 26;
+    } else {
+        // Заглавная буква
+        return 'A' + rand() % 26;
     }
+}
+
+// Функция для генерации одного слова
+void generate_word(char* word, int max_length) {
+    int length = random_int(8, max_length);
+
+    for (int i = 0; i < length; i++) {
+        word[i] = random_char();
+    }
+    word[length] = '\0';
+}
+
+int main() {
+    // Инициализация генератора случайных чисел
+    srand(time(NULL));
+
+    // Генерация количества слов (1-30)
+    int word_count = random_int(25, 30);
+
+    // Максимальный размер строки (30 слов * 10 символов + 29 запятых + точка + \0)
+    char result[30 * 10 + 29 + 1 + 1] = "";
+    char word[11]; // 10 символов + \0
+
+    for (int i = 0; i < word_count; i++) {
+        // Генерация слова
+        generate_word(word, 10);
+
+        // Добавление слова к результату
+        strcat(result, word);
+
+        // Добавление запятой (кроме последнего слова)
+        if (i < word_count - 1) {
+            strcat(result, ",");
+        }
+    }
+
+    // Добавление точки в конце
+    strcat(result, ".");
+
+    // Вывод результата
+    printf("%s\n", result);
 
     return 0;
 }

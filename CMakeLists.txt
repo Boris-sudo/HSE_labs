@@ -12,12 +12,16 @@ set(HEADERS
         ${HEADERS_DIR}/matrix.h
         ${HEADERS_DIR}/input.h
         ${HEADERS_DIR}/queue.h
+        lab-6/passenger.h
+        lab-6/file_operations.h
 )
 
 set(SOURCES
         ${HEADERS_DIR}/input.c
         ${HEADERS_DIR}/matrix.c
         ${HEADERS_DIR}/queue.c
+        lab-6/file_operations.c
+        lab-6/passenger.c
 )
 
 # adding all the executables

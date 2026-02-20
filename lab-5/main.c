@@ -27,7 +27,7 @@ char *transform(char *str, size_t len) {
     }
     res[index] = '.';
 
-    for(int i=strlen(str); i<strlen(res); ++i) {
+    for (int i = strlen(str); i < strlen(res); ++i) {
         res[i] = '\0';
     }
 
@@ -36,21 +36,42 @@ char *transform(char *str, size_t len) {
 
 int count_words(char *str) {
     int res = 0;
-    forn(i,strlen(str)) {
-        if (str[i]==',' || str[i]=='.')
+    forn(i, strlen(str)) {
+        if (str[i] == ',' || str[i] == '.')
             res++;
     }
     return res;
 }
 
+int validator_func(const char *str) {
+    const int max_count = 30;
+    const int max_len = 10;
+
+    int count = 0;
+    int len = 0;
+
+    const int n = strlen(str);
+    if (str[n-1] != '.') return 0;
+    forn(i,n) {
+        if (str[i] == ',' || str[i] == '.') {
+            if (!(str[i] >= 'a' && str[i] <= 'z')) return 0;
+            if (!(str[i] >= '0' && str[i] <= '9')) return 0;
+            if (!(str[i] >= 'A' && str[i] <= 'Z')) return 0;
+            if (len > max_len || len < 1) return 0;
+            len = 0;
+            count++;
+        } else len++;
+    }
+    return count <= max_count;
+}
+
 int main() {
     srand(time(NULL));
 
-    const int type = 0; // 0 - self test, 1 - auto test
     char *str = NULL;
 
     while (1) {
-        size_t len = input_string(&str, "Enter string for formating: ", "Error, please, try again!");
+        size_t len = input_string(&str, "Enter string for formating: ", "Error, please, try again!", validator_func);
         if (len == 1 && str[0] == '-') break;
         char *new_string = transform(str, len);
 

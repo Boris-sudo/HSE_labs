@@ -7,6 +7,7 @@
 typedef int (*double_validator_func)(const double);
 typedef int (*int_validator_func)(const int);
 typedef int (*char_validator_func)(const char);
+typedef int (*string_validator_func)(const char*);
 
 int isWhiteSpace(int c);
 
@@ -20,6 +21,6 @@ void input_int(int *value, const char* mes, const char* error, int_validator_fun
 
 void input_char(char *value, const char* mes, const char* error, char_validator_func validator);
 
-size_t input_string(char **value, const char *mes, const char *error);
+size_t input_string(char **value, const char *mes, const char *error, string_validator_func validator);
 
 #endif

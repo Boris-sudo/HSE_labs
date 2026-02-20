@@ -38,7 +38,7 @@ void input_int(int *value, const char *mes, const char *error, int_validator_fun
         }
 
         if (!isDataValid) {
-            printf(error);
+            printf("%s",error);
             printf("\n");
         }
     } while (!isDataValid);
@@ -62,7 +62,7 @@ void input_double(double *value, const char *mes, const char *error, double_vali
         }
 
         if (!isDataValid) {
-            printf(error);
+            printf("%s",error);
             printf("\n");
         }
     } while (!isDataValid);
@@ -86,13 +86,13 @@ void input_char(char *value, const char *mes, const char *error, char_validator_
         }
 
         if (!isDataValid) {
-            printf(error);
+            printf("%s",error);
             printf("\n");
         }
     } while (!isDataValid);
 }
 
-size_t input_string(char **value, const char *mes, const char *error) {
+size_t input_string(char **value, const char *mes, const char *error, string_validator_func validator) {
     size_t len = 0;
     ssize_t read = -1;
 
@@ -115,9 +115,14 @@ size_t input_string(char **value, const char *mes, const char *error) {
             *value = malloc(len);
             if (*value) {
                 strcpy(*value, buffer);
+                if (!validator(*value)) {
+                    read = -1;
+                    printf("%s\n", error);
+                }
             }
         } else {
-            printf("%s\n", error);
+            printf("%s",error);
+            printf("\n");
         }
     }
 
