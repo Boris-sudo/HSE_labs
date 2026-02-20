@@ -35,34 +35,5 @@ void generate_word(char* word, int max_length) {
 }
 
 int main() {
-    // Инициализация генератора случайных чисел
-    srand(time(NULL));
-
-    // Генерация количества слов (1-30)
-    int word_count = random_int(25, 30);
-
-    // Максимальный размер строки (30 слов * 10 символов + 29 запятых + точка + \0)
-    char result[30 * 10 + 29 + 1 + 1] = "";
-    char word[11]; // 10 символов + \0
-
-    for (int i = 0; i < word_count; i++) {
-        // Генерация слова
-        generate_word(word, 10);
-
-        // Добавление слова к результату
-        strcat(result, word);
-
-        // Добавление запятой (кроме последнего слова)
-        if (i < word_count - 1) {
-            strcat(result, ",");
-        }
-    }
-
-    // Добавление точки в конце
-    strcat(result, ".");
-
-    // Вывод результата
-    printf("%s\n", result);
-
-    return 0;
+    fileno
 }
