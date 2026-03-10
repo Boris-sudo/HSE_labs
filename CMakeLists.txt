@@ -27,6 +27,6 @@ set(SOURCES
 
 # adding all the executables
 add_executable(main lab-${LAB_INDEX}/main.c ${SOURCES} ${HEADERS})
-#target_compile_definitions(main PRIVATE AUTO_INITIALIZER)
+target_compile_definitions(main PRIVATE AUTO_INITIALIZER)
 #add_executable(add lab-${LAB_INDEX}/add.c ${SOURCES} ${HEADERS})
 add_executable(test test.c)

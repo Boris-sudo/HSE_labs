@@ -10,8 +10,7 @@ char *transform(char *str, size_t len) {
     char arr[50][100];
     forn(i, 50) forn(j, 100) arr[i][j] = 0;
     int arr_index = 0, word_index = 0;
-    forn(i, len) if (str[i] == ',' || str[i] == '.')
-            arr_index++, word_index = 0;
+    forn(i, len) if (str[i] == ',' || str[i] == '.') arr_index++, word_index = 0;
         else arr[arr_index][word_index++] = str[i];
 
     char *res = malloc(len);
